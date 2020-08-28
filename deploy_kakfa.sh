@@ -56,15 +56,19 @@ echo
 
 echo "Deploying Kafka"
 
+echo 
+
 oc apply -f cluster-operator -n $tenant
 
 echo
 
-oc get deployments
+oc apply -f kafka-persistent-metrics.yaml
+
+echo "Creating Kafka topic, topic1"
 
 echo
 
-oc apply -f kafka-persistent-metrics.yaml
+oc apply -f kafka-topic.yaml
 
 echo
 
