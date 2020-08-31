@@ -4,7 +4,7 @@ Tested on OpenShift cluster v4.5
 ## Deploy Kafka:
 Run ```./deploy_kafka.sh```
 
-The bash script will prompt for a namespace name which creates the namespace and make changes to the yaml files.
+The bash script will prompt for a namespace name which creates the namespace and makes changes to the yaml files.
 
 ## Deploy Metrics:
 Run ```./deploy_metrics.sh```
