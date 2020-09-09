@@ -4,11 +4,11 @@
 
 
 ```
-/run-test.sh <test id> <bootstrap server> <topic> <message size> <num of records> <throughput> <cluster name>
+./run-test.sh <test id> <bootstrap server> <topic> <message size> <num of records> <throughput> <cluster name>
 	
 e.g:  
 
-/run-test.sh TestCase1 my-cluster-kafka-bootstrap.kafka-cluster.svc.cluster.local:9092 topic1 1024 10000000 50000 kafka-cluster
+./run-test.sh TestCase1 my-cluster-kafka-bootstrap.kafka-cluster.svc.cluster.local:9092 topic1 1024 10000000 50000 kafka-cluster
 
 ```
 
