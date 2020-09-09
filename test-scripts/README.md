@@ -2,6 +2,10 @@
 
 ### for producer
 
+#### Pre-req
+
+- Running kafka cluster (asusming it is created with this project's scripts with default naming and labels, if not adjust in run-metrics.sh)
+- login to the ocp cluster
 
 ```
 ./run-test.sh <test id> <bootstrap server> <topic> <message size> <num of records> <throughput> <cluster name>
