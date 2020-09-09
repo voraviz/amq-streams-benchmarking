@@ -4,7 +4,7 @@
 
 
 ```
-/run-test.sh &lt; test id  &gt; &lt; bootstrap server  &gt; &lt; topic  &gt; &lt; message size &gt; &lt; num of records  &gt; &lt; throughput  &gt; &lt; cluster name  &gt; 
+/run-test.sh <test id> <bootstrap server> <topic> <message size> <num of records> <throughput> <cluster name>
 	
 e.g:  
 
