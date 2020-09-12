@@ -22,8 +22,8 @@ oc get project | grep -v NAME | awk '{print $1}'
 echo
 
 echo "Enter the name of the new project unique name, this will be used to create the namespace"
-read tenant
-#tenant=kafka-cluster
+#read tenant
+tenant=$1
 echo
 
 #Check If namespace exists
