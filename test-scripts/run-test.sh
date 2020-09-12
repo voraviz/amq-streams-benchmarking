@@ -1,4 +1,20 @@
 #!/bin/bash
+if [ $# -ne 8 ]
+  then
+    echo "Enter the kafka following parameters:"
+    echo "- Test_ID: any arbituary string to describe your test"
+    echo "- BootStrap server url" 
+    echo "- topic name"
+    echo "- payload size, in bytes"
+    echo "- Number of records"
+    echo "- throughput"
+    echo "- namespace where kafka is deployed"
+    echo "- namespace where test client is to be deployed, please create beforehand"
+    echo "e.g:"
+    echo "./run-test.sh TestCase-50mil-100k-1024-p1 my-cluster-kafka-bootstrap.kafka-cluster.svc.cluster.local:9092 topic1 1024 50000000 100000 kafka-cluster p1"
+    exit 1
+fi
+
 echo Running test: $1
 export TEST_ID=$1-$(date +%F-%T)
 echo $TEST_ID
