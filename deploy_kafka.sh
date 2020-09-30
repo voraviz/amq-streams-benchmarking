@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
-
+function check_pod(){
+    PROJECT=$1
+    NUM=$2
+    CONDITION=$3
+    COUNT=0
+    while [ ${COUNT} -lt ${NUM} ];
+    do
+        clear
+        oc get pods -n ${PROJECT}
+        sleep 5
+        COUNT=$( oc get pods -n ${PROJECT}|grep ${CONDITION} |wc -l)
+    done
+}
 working_dir=`pwd`
 
 echo "checking if oc is present"
@@ -17,13 +29,12 @@ echo "Current list of projects on the OpenShift cluster:"
 
 echo
 
-oc get project | grep -v NAME | awk '{print $1}'
+oc get project --no-headers| awk '{print $1}'
 
 echo
 
 echo "Enter the name of the new project unique name, this will be used to create the namespace"
-#read tenant
-tenant=$1
+read tenant
 echo
 
 #Check If namespace exists
@@ -50,8 +61,14 @@ echo "Project $tenant has been created"
 oc project $tenant
 
 echo 
-
-sed -i 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
+platform=$(uname)
+if [ "$platform" = 'Darwin' ];
+then
+  sed -i '.bak' 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
+  rm -f cluster-operator/*.bak
+else
+  sed -i 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
+fi
 
 echo
 
@@ -74,3 +91,6 @@ oc apply -f kafka-topic.yaml
 echo
 
 oc get deployments
+
+check_pod $tenant 9 Running
+

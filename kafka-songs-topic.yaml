@@ -1,0 +1,14 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: songs
+  labels:
+    strimzi.io/cluster: my-cluster
+spec:
+  partitions: 3
+  replicas: 2
+  config:
+    # retention 7200000 = 1 hours
+    retention.ms: 360000
+    segment.bytes: 1073741824
+

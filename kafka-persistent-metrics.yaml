@@ -25,18 +25,18 @@ spec:
      volumes:
      - id: 0
        type: persistent-claim
-       size: 100Gi
+       size: 500Gi
        deleteClaim: false
    resources:
      requests:
-       cpu: "1000m"
-       memory: "2Gi"
+       cpu: "2000m"
+       memory: "4Gi"
      limits:
-       cpu: "1000m"
-       memory: "2Gi"
+       cpu: "2000m"
+       memory: "4Gi"
    jvmOptions: 
-     -Xms: 1024m
-     -Xmx: 1024m
+     -Xms: 3072m
+     -Xmx: 3072m
    tlsSidecar:
      resources:
        limits:
