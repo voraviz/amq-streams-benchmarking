@@ -42,7 +42,7 @@ oc rollout pause deployment kafka-tutorial-song-app -n songs
 oc set env deployment/kafka-tutorial-song-app MP_MESSAGING_OUTGOING_SONGS_BOOTSTRAP_SERVERS=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092 -n songs
 oc set resources deployment kafka-tutorial-song-app  --limits="cpu=50m,memory=120Mi" -n songs
 oc set resources deployment kafka-tutorial-song-app  --requests="cpu=10m,memory=80Mi" -n songs
-oc scale deployment kafka-tutorial-song-app --replicas=50 -n songs
+oc scale deployment kafka-tutorial-song-app --replicas=100 -n songs
 oc rollout resume deployment kafka-tutorial-song-app -n songs
 ```
 Test 
@@ -81,4 +81,8 @@ Run Load test with k6
 docker run -i loadimpact/k6 run -< test-scripts/load-test-k6.js
 ```
 Remark: Run Test Consumer in another terminal
+
+Check Grafana Dashboard
+
+![](test-scripts/k6.png)
 
