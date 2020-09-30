@@ -27,7 +27,7 @@ public class SongResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public CompletionStage<Void> createSong(Song song) {
         song.setOp(song.getOp());
-        song.setOp(Operation.ADD);
+        //song.setOp(Operation.ADD);
         System.out.println(song);
         KafkaRecord<Integer, String> msg = KafkaRecord.of(song.id, JsonbBuilder.create().toJson(song));
         songs.send(msg);
