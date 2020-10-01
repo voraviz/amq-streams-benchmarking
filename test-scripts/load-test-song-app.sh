@@ -1,10 +1,13 @@
 #!/bin/bash
-for project in p1 p2 p3 p4
+for project in p1 p2 p3 p4 p5
 do
-  for counter in 1 2 3 4
+  oc new-project $project 1>/dev/null 2>&1
+  oc delete pod --all -n $project 1>/dev/null 2>&1
+  for counter in a b c d e
   do
-   oc new-project $project
+   echo "Start pod song-perf-$counter on project $project"
    oc run song-perf-$counter -n $project \
-    -i --image=loadimpact/k6 --env="SONG_APP=song-app.songs.svc.cluster.local" --rm=true --restart=Never --  run -< load-test-k6.js
+    -i --image=loadimpact/k6 --rm=true \
+    --restart=Never --  run -< load-test-k6.js &
  done
 done

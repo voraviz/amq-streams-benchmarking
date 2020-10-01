@@ -69,12 +69,25 @@ curl -X GET -v ${INDEXER}
 ```
 ### Load Test with k6
 Run load test with k6 from pod on OpenShift 
+  - each pod will run 200 concurrent reqeusts with 2K Bytes message size.
+  - Ramp-up time is 30 sec.
+  - Duration is 15 minutes.
+
 ```bash
  oc new-project p1
  oc run song-perf -n p1 \
     -i --image=loadimpact/k6  \
     --rm=true --restart=Never --  run -< test-scripts/load-test-k6.js
 ```
+Load test with 5000 concurrent request with 2K data to song app
+```bash
+oc scale deployment/song-app --replicas=25 -n songs
+cd test-scripts
+./load-test-song-app.sh
+```
+
+Check grafana for Incoming Message Rate and Total Produce Reqeust Rate
+
 <!-- Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
 ```js
 export default function() {
