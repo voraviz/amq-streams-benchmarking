@@ -1,5 +1,5 @@
 #!/bin/sh
-CONTAINER_NAME=songs
+CONTAINER_NAME=song
 TAG=v1
 # Use native container build
 START_BUILD_APP=$(date +%s)
