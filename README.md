@@ -90,6 +90,10 @@ Check grafana for Incoming Message Rate and Total Produce Reqeust Rate
 
 ![](test-scripts/song-app-5000-concurrent.png)
 
+song-app deployment is set CPU limit to 300m 
+
+![](test-scripts/song-app-utilization.png)
+
 <!-- Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
 ```js
 export default function() {
