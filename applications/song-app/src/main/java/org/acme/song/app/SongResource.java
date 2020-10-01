@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
+import org.eclipse.microprofile.reactive.messaging.OnOverflow;
 
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
 
@@ -21,6 +22,7 @@ public class SongResource {
     
     @Inject
     @Channel("songs")
+    @OnOverflow(value = OnOverflow.Strategy.BUFFER, bufferSize = 1024)
     Emitter<String> songs;
 
     @POST
