@@ -68,16 +68,23 @@ INDEXER=https://$(oc get route song-indexer -n songs -o jsonpath='{.spec.host}')
 curl -X GET -v ${INDEXER}
 ```
 ### Load Test with k6
-Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
+Run load test with k6 from pod on OpenShift 
+```bash
+ oc new-project p1
+ oc run song-perf -n p1 \
+    -i --image=loadimpact/k6  \
+    --rm=true --restart=Never --  run -< test-scripts/load-test-k6.js
+```
+<!-- Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
 ```js
 export default function() {
   const url = 'https://song-songs.apps.cluster-f2cc.f2cc.example.opentlc.com/songs';
   let headers = {'Content-Type': 'application/json'};
-```
-Run Load test with k6
+``` -->
+<!-- Run Load test with k6
 ```bash
 docker run -i loadimpact/k6 run -< test-scripts/load-test-k6.js
-```
+``` -->
 Remark: Run Test Consumer in another terminal
 
 Check Grafana Dashboard
