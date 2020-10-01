@@ -88,6 +88,8 @@ cd test-scripts
 
 Check grafana for Incoming Message Rate and Total Produce Reqeust Rate
 
+![](test-scripts/song-app-5000-concurrent.png)
+
 <!-- Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
 ```js
 export default function() {
@@ -98,9 +100,9 @@ export default function() {
 ```bash
 docker run -i loadimpact/k6 run -< test-scripts/load-test-k6.js
 ``` -->
-Remark: Run Test Consumer in another terminal
+<!-- 
 
 Check Grafana Dashboard
 
-![](test-scripts/k6.png)
+![](test-scripts/k6.png) -->
 
