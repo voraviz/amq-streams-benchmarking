@@ -36,6 +36,7 @@ Deploy songs app
 oc new-project songs --display-name="Songs Application"
 oc apply -f kafka-songs-topic.yaml -n kafka
 oc apply -f applications/song-app/src/main/kubernetes/kubernetes.yml -n songs
+oc scale deployment song-app --replicas=0 -n songs
 oc create route edge song --service=song-app --port=8080 -n songs
 ## You need to change "kafka" to match your AMQ Streams project
 oc set env deployment/song-app MP_MESSAGING_OUTGOING_SONGS_BOOTSTRAP_SERVERS=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092 -n songs
