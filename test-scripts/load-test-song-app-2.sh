@@ -1,14 +1,13 @@
 #!/bin/bash
-for project in p1 p2 p3 p4 p5
+for project in p6 p7 p8  p9 p10
 do
-  echo "Process for $project"
   oc new-project $project 1>/dev/null 2>&1
-  #oc delete pod --all -n $project 1>/dev/null 2>&1
-  for counter in a b c d e
+  oc delete pods --all -n $project 1>/dev/null 2>&1
+  for counter in f g h i j
   do
    echo "Start pod song-perf-$counter on project $project"
    oc run song-perf-$counter -n $project \
     -i --image=loadimpact/k6 --rm=true \
-    --restart=Never --  run -< load-test-k6.js &
+    --restart=Never --  run -< load-test-k6-2.js &
  done
 done
