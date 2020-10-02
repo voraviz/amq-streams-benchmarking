@@ -104,7 +104,7 @@ Check grafana for Incoming Message Rate and Total Produce Reqeust Rate (1 client
 
 ![](test-scripts/song-app-5000-concurrent.png)
 
-2 clients
+<!-- 2 clients
 
 ![](test-scripts/song-app-5000-concurrent-2clients.png)
 
@@ -115,7 +115,7 @@ oc delete deployment --all -n songs
 oc apply -f test-scripts/song-app-3-clients.yml -n songs
 cd test-scripts
 ./load-test-song-app-3-clients.sh
-```
+``` -->
 
 song-app deployment is set CPU limit to 300m 
 
