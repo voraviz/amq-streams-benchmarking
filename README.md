@@ -112,6 +112,14 @@ song-app deployment is set CPU limit to 300m
 
 ![](test-scripts/song-app-utilization.png)
 
+Load test AMQ Streams with song-app configured to be 3 clients by deploy 3 deployment of song-app and configure within same service
+```bash
+oc delete deployment --all -n songs
+oc apply -f test-scripts/song-app-3-clients.yml -n songs
+cd test-scripts
+./load-test-song-app-3-clients.sh
+```
+
 <!-- Edit [test-scripts/load-test-k6.js](test-scripts/load-test-k6.js). Replace url to your song app URL
 ```js
 export default function() {
