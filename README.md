@@ -67,8 +67,8 @@ Test
 INDEXER=https://$(oc get route song-indexer -n songs -o jsonpath='{.spec.host}')/events
 curl -X GET -v ${INDEXER}
 ```
-### Load Test with k6
-Run load test with k6 from pod on OpenShift 
+### Load Test with k6 load test tool
+Run load test with [k6](https://k6.io) from pod on OpenShift 
   - each pod will run 200 concurrent reqeusts with 2K Bytes message size.
   - Ramp-up time is 30 sec.
   - Duration is 15 minutes.
@@ -79,6 +79,12 @@ Run load test with k6 from pod on OpenShift
     -i --image=loadimpact/k6  \
     --rm=true --restart=Never --  run -< test-scripts/load-test-k6.js
 ```
+
+Run k6 locally by
+```bash
+docker run -i loadimpact/k6 run -< test-scripts/load-test-k6.js
+```
+
 Load test with 5000 concurrent request with 2K data to song app
 ```bash
 oc scale deployment/song-app --replicas=25 -n songs
