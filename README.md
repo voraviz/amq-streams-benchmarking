@@ -91,10 +91,22 @@ oc scale deployment/song-app --replicas=25 -n songs
 cd test-scripts
 ./load-test-song-app.sh
 ```
-
-Check grafana for Incoming Message Rate and Total Produce Reqeust Rate
+To test with 2 client
+```bash
+oc apply -f applications/song-app/src/main/kubernetes/kubernetes-2.yml -n songs
+oc scale deployment song-app-2 --replicas=0 -n songs
+oc set env deployment/song-app-2 MP_MESSAGING_OUTGOING_SONGS_BOOTSTRAP_SERVERS=my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092 -n songs
+oc scale deployment song-app --replicas=30 -n songs
+cd test-scripts
+./load-test-song-app-2.sh
+```
+Check grafana for Incoming Message Rate and Total Produce Reqeust Rate (1 client)
 
 ![](test-scripts/song-app-5000-concurrent.png)
+
+2 clients
+
+![](test-scripts/song-app-5000-concurrent-2clients.png)
 
 song-app deployment is set CPU limit to 300m 
 
