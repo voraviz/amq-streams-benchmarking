@@ -20,7 +20,8 @@ Import a new dashboard, *../grafana-dashboards/strimzi-kafka.json*
 ![Grafana_screenshot](https://user-images.githubusercontent.com/25560159/91380974-d7973b00-e858-11ea-9934-d903ddf12e23.png)
 
 ## Load Test
-Load Test
+- Expose route for Prometheus in kafka monitor project
+- Run load test
 ```bash
 cd test-scripts
 ./load-test.sh

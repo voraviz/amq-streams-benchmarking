@@ -10,6 +10,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.metrics.MetricUnits;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.reactive.messaging.Channel;
 import org.eclipse.microprofile.reactive.messaging.Emitter;
 import org.eclipse.microprofile.reactive.messaging.OnOverflow;
@@ -27,6 +30,15 @@ public class SongResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Counted(
+        name = "countdSong", 
+        description = "Counts how many times the song producer method has been invoked"
+        )
+    @Timed(
+        name = "timedSong", 
+        description = "Times how long it takes to put message to topic", 
+        unit = MetricUnits.MILLISECONDS
+        )
     public CompletionStage<Void> createSong(Song song) {
         song.setOp(song.getOp());
         //song.setOp(Operation.ADD);
