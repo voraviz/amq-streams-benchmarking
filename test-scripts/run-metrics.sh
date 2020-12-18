@@ -1,7 +1,17 @@
 #!/bin/bash
+function check-process(){
+  if ps -p $1 > /dev/null
+then
+   echo "$1 is running"
+   # Do something knowing the pid exists, i.e. the process with $PID is running
+else
+  echo "STOPPED"
+fi
+}
 NAMESPACE=$1
 PROM_URL=$2
-PROCESS_STATE=$(check-process.sh $PERF_ID )
+PERF_ID=$3
+PROCESS_STATE=$(check-process $PERF_ID )
 echo 'POD,CPU(Mi),MEMORY(Mi),JVM(Mi),TIMESTAMP' > ./$TEST_ID/output.csv
 echo 'POD,CPU(Mi),MEMORY(Mi),JVM(MI),TIMESTAMP' > ./$TEST_ID/kafka-0-output.csv
 echo 'POD,CPU(Mi),MEMORY(Mi),JVM(MI),TIMESTAMP' > ./$TEST_ID/kafka-1-output.csv
@@ -37,7 +47,7 @@ do
     ((avgCounter++))
   fi
   sleep 10
-  PROCESS_STATE=$(check-process.sh $PERF_ID )
+  PROCESS_STATE=$(check-process $PERF_ID )
   echo METRICS:  -$PROCESS_STATE-
   (( counter++))
 done
