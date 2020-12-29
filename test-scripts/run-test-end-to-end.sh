@@ -21,7 +21,7 @@ export TEST_ID=$1-$(date +%F-%T)
 echo $TEST_ID
 mkdir $TEST_ID
 echo $2 $3 $4 $5 $6 $7 $8 
-./run-perf.sh $2 $3 $4 $5 $6 $8 &
+./run-perf-end-to-end.sh $2 $3 $4 $5 $6 $8 &
 export PERF_ID=$!
 echo Perf test PID: $PERF_ID
 sleep 1

@@ -41,20 +41,21 @@ echo
 
 oc get project $tenant > /dev/null 2>&1
 
-if [ $? -eq 0 ]
-then
-  echo "Project $tenant already exists, please select a unique name"
-  echo "Current list of projects on the OpenShift cluster"
-  sleep 2
+# if [ $? -eq 0 ]
+# then
+#   echo "Project $tenant already exists, please select a unique name"
+#   echo "Current list of projects on the OpenShift cluster"
+#   sleep 2
 
- oc get project | grep -v NAME | awk '{print $1}'
-  exit 1
-fi
+#  oc get project | grep -v NAME | awk '{print $1}'
+#   exit 1
+# fi
 
 echo
 echo "Creating project: $tenant"
 
 oc new-project $tenant --description="Kafka cluster"
+oc delete limitrange --all -n $tenant
 
 echo "Project $tenant has been created"
 
@@ -64,21 +65,21 @@ echo
 platform=$(uname)
 if [ "$platform" = 'Darwin' ];
 then
-  sed -i '.bak' 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
-  rm -f cluster-operator/*.bak
+  sed -i '' 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
 else
   sed -i 's/namespace: .*/namespace: '"$tenant"'/' cluster-operator/*RoleBinding*.yaml
 fi
 
 echo
 
-echo "Deploying Kafka"
+echo "Deploying AMQ Streams Operator"
 
 echo 
 
 oc apply -f cluster-operator -n $tenant
 
 echo
+echo "Deploying Kafka Cluster"
 
 oc apply -f kafka-persistent-metrics.yaml
 

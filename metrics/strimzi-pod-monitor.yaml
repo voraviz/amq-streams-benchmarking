@@ -10,7 +10,7 @@ spec:
       strimzi.io/kind: cluster-operator
   namespaceSelector:
     matchNames:
-      - kafka
+      - amq-streams
   podMetricsEndpoints:
   - path: /metrics
     port: http
@@ -27,7 +27,7 @@ spec:
       app.kubernetes.io/name: entity-operator
   namespaceSelector:
     matchNames:
-      - kafka
+      - amq-streams
   podMetricsEndpoints:
   - path: /metrics
     port: healthcheck

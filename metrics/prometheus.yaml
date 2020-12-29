@@ -43,7 +43,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: prometheus-server
-    namespace: kafka-monitor
+    namespace: amq-streams-monitor
 
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -71,7 +71,7 @@ spec:
       app: strimzi
   alerting:
     alertmanagers:
-    - namespace: kafka-monitor
+    - namespace: amq-streams-monitor
       name: alertmanager
       port: alertmanager
   additionalScrapeConfigs:

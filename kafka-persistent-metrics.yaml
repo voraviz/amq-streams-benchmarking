@@ -1,11 +1,11 @@
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
- name: my-cluster
+ name: benchmark-cluster
 spec:
  kafka:
    version: 2.5.0
-   replicas: 3
+   replicas: 4
    listeners:
      plain: {}
      tls: {}
@@ -29,14 +29,14 @@ spec:
        deleteClaim: false
    resources:
      requests:
-       cpu: "2000m"
-       memory: "4Gi"
+       cpu: "4"
+       memory: "8Gi"
      limits:
-       cpu: "2000m"
-       memory: "4Gi"
+       cpu: "4"
+       memory: "8Gi"
    jvmOptions: 
-     -Xms: 3072m
-     -Xmx: 3072m
+     -Xms: 4096m
+     -Xmx: 4096m
    tlsSidecar:
      resources:
        limits:

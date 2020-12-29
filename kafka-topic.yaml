@@ -5,7 +5,7 @@ metadata:
   labels:
     strimzi.io/cluster: my-cluster
 spec:
-  partitions: 3
+  partitions: 4
   replicas: 2
   config:
     # retention 7200000 = 2 hours

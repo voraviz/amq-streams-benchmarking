@@ -61,7 +61,6 @@ oc apply -f metrics/strimzi-service-monitor.yaml
 oc apply -f metrics/strimzi-pod-monitor.yaml
 oc apply -f metrics/prometheus-rules.yaml
 oc apply -f metrics/prometheus.yaml
-oc expose svc/prometheus-operated
 echo
 
 echo "Deploy Grafana"
@@ -73,3 +72,6 @@ echo
 oc get deployments
 
 check_pod $tenant 3 Running
+oc expose svc/prometheus-operated -n $tenant
+echo "Prometheus URL=> http://$(oc get route/prometheus-operated -o jsonpath='{.spec.host}' -n $tenant)"
+echo "Grafana URL=> http://$(oc get route/grafana -o jsonpath='{.spec.host}' -n $tenant)"
