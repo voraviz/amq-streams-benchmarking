@@ -1,8 +1,10 @@
 #!/bin/bash
 function check-process(){
-  if ps -p $1 > /dev/null
+  #if ps -p $1 > /dev/null
+  ps -ef | grep "oc run" | grep -v grep
+  if [ $? -eq 0 ];
 then
-   echo "$1 is running"
+   echo "test still is running"
    # Do something knowing the pid exists, i.e. the process with $PID is running
 else
   echo "STOPPED"

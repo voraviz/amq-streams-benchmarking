@@ -13,7 +13,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: prometheus-operator
-  namespace: amq-streams-monitor
+  namespace: kafka-metrics
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -113,7 +113,7 @@ metadata:
     app.kubernetes.io/name: prometheus-operator
     app.kubernetes.io/version: v0.38.1
   name: prometheus-operator
-  namespace: amq-streams-monitor
+  namespace: kafka-metrics
 spec:
   replicas: 1
   selector:
@@ -160,7 +160,7 @@ metadata:
     app.kubernetes.io/name: prometheus-operator
     app.kubernetes.io/version: v0.38.1
   name: prometheus-operator
-  namespace: amq-streams-monitor
+  namespace: kafka-metrics
 ---
 apiVersion: v1
 kind: Service
@@ -170,7 +170,7 @@ metadata:
     app.kubernetes.io/name: prometheus-operator
     app.kubernetes.io/version: v0.38.1
   name: prometheus-operator
-  namespace: amq-streams-monitor
+  namespace: kafka-metrics
 spec:
   clusterIP: None
   ports:

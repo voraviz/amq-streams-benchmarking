@@ -16,7 +16,7 @@ $BOOTSTRAP \
 $TOPIC \
 $NUM_RECORDS \
 1 \
-$RECORD_SIZE >  ./$TEST_ID/end-to-end-perf-test.txt
+$RECORD_SIZE >  ./$TEST_ID/end-to-end-perf-test.txt &
 # --num-records $NUM_RECORDS \
 # --throughput $THROUGHPUT --producer-props bootstrap.servers=$BOOTSTRAP  \
 # key.serializer=org.apache.kafka.common.serialization.StringSerializer value.serializer=org.apache.kafka.common.serialization.StringSerializer  --print-metrics --topic $TOPIC --record-size $RECORD_SIZE --print-metrics > ./$TEST_ID/perf-test.txt

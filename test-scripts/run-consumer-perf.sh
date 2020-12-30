@@ -12,7 +12,7 @@ oc run kafka-consumer-perf -n $PERF_NS \
 --messages $NUM_RECORDS \
 --bootstrap-server $BOOTSTRAP \
 --topic $TOPIC \
---threads 1 \
+--threads 10 \
 --print-metrics \
 --timeout 1000000000 \
 --group group1 --show-detailed-stats > ./${NAME}/output.csv

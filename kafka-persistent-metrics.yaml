@@ -1,11 +1,11 @@
 apiVersion: kafka.strimzi.io/v1beta1
 kind: Kafka
 metadata:
- name: benchmark-cluster
+ name: my-cluster
 spec:
  kafka:
    version: 2.5.0
-   replicas: 4
+   replicas: 3
    listeners:
      plain: {}
      tls: {}

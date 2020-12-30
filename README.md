@@ -1,6 +1,19 @@
 # amq-streams-benchmarking
 Tested on OpenShift v4.5
+<!-- TOC -->
 
+- [amq-streams-benchmarking](#amq-streams-benchmarking)
+  - [Deploy Kafka:](#deploy-kafka)
+  - [Deploy Metrics:](#deploy-metrics)
+  - [Benchmark](#benchmark)
+    - [Producer and Consumer](#producer-and-consumer)
+    - [End-to-End](#end-to-end)
+  - [Deploy Sample Application](#deploy-sample-application)
+    - [Deploy Producer Application](#deploy-producer-application)
+    - [Deploy Consumer Application](#deploy-consumer-application)
+    - [Load Test with k6 load test tool](#load-test-with-k6-load-test-tool)
+
+<!-- /TOC -->
 ## Deploy Kafka:
 Run ```./deploy_kafka.sh```
 
@@ -19,12 +32,18 @@ Import a new dashboard, *../grafana-dashboards/strimzi-kafka.json*
 
 ![Grafana_screenshot](https://user-images.githubusercontent.com/25560159/91380974-d7973b00-e858-11ea-9934-d903ddf12e23.png)
 
-## Load Test
-- Expose route for Prometheus in kafka monitor project
-- Run load test
+## Benchmark
+### Producer and Consumer
+- Run benchmark for producer and consumer
 ```bash
 cd test-scripts
-./load-test.sh
+./benchmark.sh
+```
+### End-to-End
+- Run benchmark for end-to-end latency test
+```bash
+cd test-scripts
+./benchmark-end-to-end.sh
 ```
 
 ## Deploy Sample Application

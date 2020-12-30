@@ -23,18 +23,28 @@ echo
 
 echo "Number of partitions: "
 read PARTITIONS
+echo
+
+echo "Throughput (messages per sec, -1 to unlimited): "
+read THROUGHPUT
+echo
 
 echo "Do you want to test with consumers? (y/n): "
 read IS_CONSUMER
-
+echo
 
 KAFKA=$(oc get kafka --no-headers -n $KAFKA_PROJECT|awk '{print $1}'|head -n 1)
 CPU=$(oc get kafka $KAFKA -o jsonpath='{.spec.kafka.resources.limits.cpu}' -n $KAFKA_PROJECT)
 MEMORY=$(oc get kafka $KAFKA -o jsonpath='{.spec.kafka.resources.limits.memory}' -n $KAFKA_PROJECT)
 BOOTSTRAP=$(oc get svc --no-headers -n $KAFKA_PROJECT | grep bootstrap | awk '{print $1}').$KAFKA_PROJECT.svc.cluster.local:9092
 PROMETHEUS_URL=http://$(oc get route/prometheus-operated -o jsonpath='{.spec.host}' -n $MONITOR_PROJECT)/api/v1/query
-NAME=${CPU}vCPU-$MEMORY-${PARTITIONS}partitions-${NUM_OF_RECORDS}records-unlimited-$(expr $RECORD_SIZE / 1024)KB
 
+if [ $THROUGHPUT != "-1" ];
+then
+    NAME=${CPU}vCPU-$MEMORY-${PARTITIONS}partitions-${NUM_OF_RECORDS}records-${THROUGHPUT}TPS-$(expr $RECORD_SIZE / 1024)KB
+else
+    NAME=${CPU}vCPU-$MEMORY-${PARTITIONS}partitions-${NUM_OF_RECORDS}records-unlimited-$(expr $RECORD_SIZE / 1024)KB
+fi
 echo "********** Parameters for run this benchmark **********"
 echo
 echo "Kafka: $KAFKA"
@@ -43,7 +53,7 @@ echo "Broker vCPU: $CPU"
 echo "Broker Memory: $MEMORY"
 echo "Prometheus URL: $PROMETHEUS_URL"
 echo "Project Name Prefix: $NAME"
-echo
+echo "Test with consumer: $IS_CONSUMER"
 echo
 echo "*******************************************************"
 echo

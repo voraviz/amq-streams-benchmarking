@@ -15,15 +15,16 @@ if [ $# -ne 9 ]
     echo "./run-test.sh TestCase-50mil-100k-1024-p1 my-cluster-kafka-bootstrap.kafka-cluster.svc.cluster.local:9092 topic1 1024 50000000 100000 kafka-cluster p1 http://prometheus-operated-kafka-cluster-1.apps.cluster-83a6.83a6.example.opentlc.com/api/v1/query"
     exit 1
 fi
-
+set -x
 echo Running test: $1
 export TEST_ID=$1-$(date +%F-%T)
 echo $TEST_ID
 mkdir $TEST_ID
 echo $2 $3 $4 $5 $6 $7 $8 
-./run-perf-end-to-end.sh $2 $3 $4 $5 $6 $8 &
+./run-perf-end-to-end.sh $2 $3 $4 $5 $6 $8 
 export PERF_ID=$!
 echo Perf test PID: $PERF_ID
 sleep 1
 ./run-metrics.sh $7 $9 $PERF_ID &
 exit 0
+set +x

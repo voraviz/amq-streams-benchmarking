@@ -20,7 +20,7 @@ import org.eclipse.microprofile.reactive.messaging.OnOverflow;
 import io.smallrye.reactive.messaging.kafka.KafkaRecord;
 
 
-@Path("/songs")
+@Path("/")
 public class SongResource {
     
     @Inject
@@ -29,6 +29,7 @@ public class SongResource {
     Emitter<String> songs;
 
     @POST
+    @Path("/songs")
     @Consumes(MediaType.APPLICATION_JSON)
     @Counted(
         name = "countdSong", 
